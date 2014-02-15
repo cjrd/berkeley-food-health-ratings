@@ -1,0 +1,41 @@
+== Data Domain and Storyboard ==
+I want to interactively explore health inspection data results for the city of Berkeley. Currently, the health inspection results are available via a query-based database: [http://www.ci.berkeley.ca.us/environmentalhealth/inspections.asp]. As a new resident of Berkeley, I don't know the names of most restaurants, and in order to explore the health inspection results, I must copy and paste the restaurant names between Google maps and the database. I will visualize this data using a map-based starfield display of the restaurants, where the color of the restaurant is indicative of the health inspection results.
+
+===Features===
+
+* Dynamic query filter of restaurant by name
+* Intuitive color schema for restaurant ratings
+* Ability to zoom into a desired region, e.g. Euclid street
+* Ability to dynamically filter restaurants by health inspection results
+* Legend and description of the various map/restaurant components
+
+===Storyboard===
+
+[[Image:A3-reed-storyboard.jpg | 800px]]
+
+This storyboard gives an overview of the various features discussed above, where the key interaction will be the dynamic query filter for the restaurant name:
+
+[[Image:A3-reed-storyboard2.jpg | 800px]]
+
+where in (1) all restaurants are displayed, (2) as the user types the restaurants are filtered on the map, (3) autocompletion offers suggestions, and (4) the health review information is shown for the selected restaurant.
+
+===Justification===
+Showing the health inspection data as a starfield display on a map allows an individual to explore the inspection results without knowing the exact names of the restaurants. Furthermore, by using approximate string matching to dynamically filter the displayed restaurants, a user can find particular restaurants without completely remembering their name, e.g. "I went into a coffeeshop this morning on Euclid, it was called Wakening... or something like that." With the current database implementation, the user must know the exact name, but the map and fuzzy search implementation allows the user to explore by location or by partial string matching.
+
+
+== Implementation ==
+The first major hurdle was scraping the health inspection results from [http://www.ci.berkeley.ca.us/environmentalhealth/inspections.asp] and converting the addresses into geo loactions. I found that searching for a space as a restaurant address returned all of the restaurants in the database. I then wrote a python script to parse these entries and used Google's geocoding API [https://developers.google.com/maps/documentation/geocoding/] to turn the addresses into geolocations.
+
+The core of my visualization application used d3 and javascript for implementation. I also used the d3.geo.tile [https://gist.github.com/mbostock/4132797] and topojson [https://github.com/mbostock/topojson] plugins to support dynamic map loading. I used Mike Bostock's vector tiles example with openmaps.org as a base for my code (I didn't know how to obtain a map from openmaps) [http://bl.ocks.org/mbostock/5616813].
+
+For your enjoyment, here is a video of my implementation with a verbal explanation:
+
+
+<mediaplayer>http://youtu.be/WHW7wH5M7_I</mediaplayer>
+
+For the final implementation, I did not implement a zoom feature, but rather, I used an inset zoom box to distinguish nearby restaurants. I initially tried a zoom feature, but the application needed to pull data from openmaps.org for each zoom level, and the overall experience felt quite laggy. The inset zoom box accomplished similar results without a laggy zoom-in/zoom-out effect:
+
+[[Image:A3-reed-inset-zoom.jpg | 800px]]
+
+== Commentary ==
+Scraping/parsing/translating the restaurant health inspection results took a bit longer than expected (about 2 hours) as I had not previously used Google's geolocation API. I've used d3 quite a bit for larger projects, so I was familiar with it's syntax, commands, and data-interaction patterns. However, I was new to using maps with d3, and I ran into some trouble trying to successfully implement the inset (zoomed) view alongside the zoomed out view. In the end, I used an (embarassingly) hacky strategy of completely reloading the inset view whenever the user clicks on a new area. I'll probably return to this application and refactor this hack, as well as clean up the code a bit and include more context for interpreting the visualization. Overall, this project took me around 11 hours to complete. I'm nearly satisfied with this visualization, and with a bit of tweaking, it's something I'll be glad to share with others. This assignment was definitely a worthwhile use of my time.

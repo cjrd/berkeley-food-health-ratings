@@ -1,0 +1,835 @@
+﻿/* Purpose:  SiteMasterFonts.css defines universal text-related styles 
+   for the site.
+
+   NOTE:  For the most part, we try to totally separate layout-related
+   styles from font-related styles.  SiteMasterFonts.css should not 
+   contain any layout-related definitions except for extremely limited exceptions!
+   
+   Revision History:
+   -----------------
+   2013-Feb - For SR #128472, introduce officeClosuresDescriptiveText definition for 
+   new <p> tags being rendered by OfficeClosureDateSidebarTable.ascx.  Installed by
+   CR #1774.  (EYang)
+   2012-Aug - Applies moderate cleanup and clarified comments for 2012 design
+   improvements.  The more important changes are taking place in new stylesheet,
+   Home.css.  (EYang)
+   2008-Jun - Additions for new page CalendarEventWebcastMain.aspx.  (EYang)
+   2008-Apr - Corrections for generic "visited" links problem that were on our site since Jan 2008
+   go-live.  Also deleted some obsolete "pressReleaseIndex" styles that had been x'd out.  (EYang)
+   2008-Jan - Initial Release for BerkeleyExtranetSite project.  (EYang)
+*/
+
+/* BEGIN - default global text styles for the entire site */
+/* defines default fonts for the entire site; lower-level
+    styling is free to override */
+body
+{
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+h1
+{
+  font-size: 1.2em; 
+	font-weight: bold;
+}
+
+h2
+{
+	font-size: 1.0em;
+	font-weight:bold;
+}
+
+h3, h4, h5, h6, .innerContentHeader
+{
+	font-size: 1.2em; /* until Nov 2006, we had used h3 = 1.2em's for testing and 
+                       development - changes expected following Jan 2008 public launch */
+	font-weight: bold;
+}
+
+.innerContentContainer 
+{
+  font-size: 0.9em; /* default text size for entire site */
+} 
+
+/* default hyperlink styles for all main body text on the site */
+/* ALERT - a:focus not support by IE6, so we omit for now */
+a:link
+{
+  text-decoration: underline;
+  font-weight: normal;
+  color: #000099; /* #000099 = navy */ 
+}
+
+a:visited
+{
+  text-decoration: underline;
+  font-weight: normal;
+  xxxcolor: #990099; /* ALERT!  By not specifying a color attribute for "visited" we let the browser's
+                        default color take over.  (EYang, Apr 2008) */
+}
+
+/* "newer" styling of hover recommended by evolt.org article by Bill Mason, Aug 2002
+   (definition at universal level is necessary to prevent conflict if named styles
+   want to override this behavior)
+*/
+a:link:hover, a:visited:hover
+{
+  text-decoration: underline;
+}
+
+/* "newer" styling of active recommended by evolt.org article by Bill Mason, Aug 2002
+   (definition at universal level is necessary to prevent conflict if named styles
+   want to override this behavior)
+*/
+a:link:active, a:visited:active
+{
+  text-decoration: underline;
+}
+
+
+/* "mailTo" defines the default styles for all email addresses that
+   appear on our site; beware that utility routine .GetEmailMailToLink()
+   contains a reference to "mailTo" style with hardcoding */
+a.mailTo:link, a.mailTo:visited, a.mailTo:hover, a.mailTo:active
+{
+  font-size: 1.0em;
+  text-decoration: underline;
+  font-weight: normal;
+  color: #000099; /* #000099 = navy */ 
+}
+
+/* END - default global text styles for the entire site */
+
+/* BEGIN - LHS menu definitions */
+/* ALERT!  When using .NET BulletedList control, it is possible
+   to attach style to ListItem, but not <a> tag itself; thus, you
+   need to use 3-level nesting to style the behavior of <a> tag */
+ul.sidebarMenuList
+{
+  /* list-style / margin / padding settings get rid of default bullet points */
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+}
+
+ul.sidebarMenuList li
+{
+  padding-left: 2px; /* original padding-left = 5px, looks better at 2px after
+                        putting in Rennie-Mackintosh gif images on headers */
+  font-size: 10pt;
+  xxxbackground: transparent url(images/redarrow10x4.GIF) 1px 3px no-repeat;
+}
+
+
+/* nested ul-li-a requires that we separate out a:link, a:active, a:visited
+   and a:hover to achieve desired styling AND make sure we don't interfere with
+   other styles (EYang, Dec 2007) */
+ul.sidebarMenuList li a:link
+{
+  text-decoration: none; 
+  color: #ffffff;
+  font-weight: normal;
+}
+
+ul.sidebarMenuList li a:visited 
+{
+  text-decoration: none; 
+  color: #ffffff;
+  font-weight: normal;
+}
+
+ul.sidebarMenuList li a:hover 
+{
+  text-decoration: underline; 
+  color: #ffffff;
+  font-weight: normal;
+}
+
+#Col1InnerContainer
+{
+  color: #ffffff; /* make sure any extra text on LHS that is not in ul-li 
+                     construct shows up against maroon background, too */
+}
+
+a.sidebarInlineLink:link, a.sidebarInlineLink:visited, a.sidebarInlineLink:hover, a.sidebarInlineLink:active
+{
+  text-decoration: underline; 
+  color: #ffffff; 
+  font-weight: normal;
+}
+
+
+/* END - LHS menu definitions */
+
+/* general styling for PortalHeader.ascx text */
+.portalHeaderText
+{
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 10pt;
+  color: #999999; /* #999999 = gray */
+}
+
+
+/* BEGIN - styles for toolbar in PortalHeader.ascx */
+.contentToolbarStaticText /* new style for PressReleaseMain.aspx, we want static text to match grayed-out look */
+{
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 8pt;
+  font-weight: normal;
+  text-decoration: none;
+  color: #999999; /* #999999 = gray */
+}
+
+a.contentToolbar:link
+{
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 8pt;
+  font-weight: normal;
+  text-decoration: none;
+  color: #999999; /* #999999 = gray */
+}
+
+a.contentToolbar:visited
+{
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 8pt;
+  font-weight: normal;
+  text-decoration: none;
+  color: #999999; /* #999999 = gray */
+}
+
+a.contentToolbar:hover
+{
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 8pt;
+  font-weight: normal;
+  text-decoration: underline;
+  color: #660000;
+}
+
+a.contentToolbar:active
+{
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 8pt;
+  font-weight: normal;
+  text-decoration: none;
+  color: #999999; /* #999999 = gray */
+}
+
+/* END - styles for toolbar in PortalHeader.ascx */
+
+/* BEGIN - styles for PortalFooter.ascx */
+.pageFooterContainer
+{
+  font-size: 0.8em; /* Increased to 0.8 from old value of 0.7 based on Mary Kay request 12/05/08 - NMehta */
+  /* TODO - move layout-related parts of footer definitions to SiteMasterLayout.css */
+  margin-top: 20px; 
+  margin-bottom: 20px; 
+  text-align: center;
+}
+
+a.footerLink:link, a.footerLink:visited, a.footerLink:hover, a.footerLink:active
+{
+  color: #000000; 
+  font-weight: normal;
+  text-decoration: underline;
+}
+
+/* END - styles for PortalFooter.ascx */
+
+/* BEGIN - Press Release styles */
+
+/* Part 1 = styles for City Home Page (Home.aspx).  ALERT!  Due to 2012 design improvements,
+   Part 1 styles are getting deprecated.  We'll leave these styles in place for compatibility
+   with old Home.aspx, which will remain on non-production servers for reference, but for
+   the new version of Home.aspx all relevant styles are moved to and renamed in Home.css.
+   (EYang, Aug 2012)
+*/
+.collectionBlockPressReleaseItem
+{
+  margin-bottom: 20px;
+}
+
+.collectionBlockPressReleaseItem p a.pressReleaseTitle:link, a.pressReleaseTitle:visited, a.pressReleaseTitle:hover, a.pressReleaseTitle:active
+{
+  font-weight: bold;
+  text-decoration: none;
+  color: #660000;
+}
+
+.collectionBlockPressReleaseItem p a.inlineLink:link
+{
+  text-decoration: none;
+  color: #999999; /* #999999 = gray */
+}
+
+.collectionBlockPressReleaseItem p a.inlineLink:visited
+{
+  text-decoration: none;
+  color: #999999; /* #999999 = gray */
+}
+
+.collectionBlockPressReleaseItem p a.inlineLink:hover
+{
+  text-decoration: underline;
+  color: #660000; /* #660000 = maroon */
+}
+
+.collectionBlockPressReleaseItem p a.inlineLink:active
+{
+  text-decoration: none;
+  color: #999999; /* #999999 = gray */
+}
+
+/* Part 2 = styles for Press Release Index (PressReleaseMain.aspx running
+   in "list" or "index" mode */
+ul.pressReleaseMonthIndex li a:link
+{
+  text-decoration: none; 
+  color: #000099; /* #000099 = navy */
+  font-weight: normal;
+}
+
+ul.pressReleaseMonthIndex li a:visited 
+{
+  text-decoration: none; 
+  color: #000099; /* #000099 = navy */
+  font-weight: normal;
+}
+
+ul.pressReleaseMonthIndex li a:hover 
+{
+  text-decoration: underline; 
+  color: #000099; /* #000099 = navy */
+  font-weight: normal;
+}
+
+ul.pressReleaseMonthIndex li a:active 
+{
+  text-decoration: none; 
+  color: #000099; /* #000099 = navy */
+  font-weight: normal;
+}
+
+
+/* Part 3 = styles for Press Release Detail (PressReleaseMain.aspx running
+   in "detail" mode, but also affects printable content pages too */
+p.pressReleaseTitle /* use "p." qualifier to ensure no conflict with "a." definitions */
+{
+  font-size: 1.2em;
+  font-weight: bold;
+  text-align: center; 
+   
+}
+
+p.pressReleaseTitle .pressReleaseSubtitle /* use "p." qualifier to ensure no conflict with "a." definitions */
+{
+  font-size: 0.9em;
+  font-style: italic;   
+}
+
+.pressReleaseMediaContactInfo /* for now, copy the toolbar styles from
+                                 PortalHeader.ascx (EYang, Sep 2007) */
+{
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 10pt; /* requires absolute sizing to avoid messing up toolbar
+                      positioning in PortalHeader.ascx */
+  color: #999999; /* #999999 = gray */
+}
+
+.pressReleaseMediaContactInfo a.mediaContactEmail:link, a.mediaContactEmail:visited, a.mediaContactEmail:hover, a.mediaContactEmail:active
+{
+  color: #000099; /* #000099 = navy */ 
+  text-decoration: underline;
+}
+
+.pressReleaseMainBodyLeadIn
+{
+  font-weight: bold;
+}
+
+.pressReleaseIndexCutoverFooter
+{
+  /* color: #000000; */
+  text-align: center;
+  font-style: italic;
+  border-top: solid 1px #999f7f;
+}
+
+.pressReleaseIndexCutoverFooter a.oldArchiveLink:link, a.oldArchiveLink:visited, a.oldArchiveLink:hover, a.oldArchiveLink:active
+{
+  color: #000000;
+  text-decoration: underline;
+}
+
+
+/* END - Press Release styles */
+
+/* BEGIN - styling for generic collection block summaries at department
+   portal level
+   - correct style sequence reset to "collectionBlockSummaryItem - p - a"
+   (earlier versions had non-XHTML compliant span in this sequence, now
+   resolved by PanelControlPlus control) (EYang, Oct 2007)
+*/
+.collectionBlockSummaryItem
+{
+    margin-bottom: 20px;
+}
+
+.collectionBlockSummaryItem p a.title:link, a.title:visited, a.title:hover, a.title:active
+{
+  font-weight: bold;
+  text-decoration: none;
+  color: #000099; /* #000099 = navy */
+}
+
+.collectionBlockSummaryItem p a.inlineLink:link
+{
+  font-weight: normal;
+  text-decoration: none;
+  color: #999999; /* #999999 = gray */
+}
+
+.collectionBlockSummaryItem p a.inlineLink:visited
+{
+  font-weight: normal;
+  text-decoration: none;
+  color: #999999; /* #999999 = gray */
+}
+
+.collectionBlockSummaryItem p a.inlineLink:hover
+{
+  font-weight: normal;
+  text-decoration: underline;
+  color: #660000; /* #660000 = maroon */
+}
+
+.collectionBlockSummaryItem p a.inlineLink:active
+{
+  font-weight: normal;
+  text-decoration: none;
+  color: #999999; /* #999999 = gray */
+}
+
+/* END - styling for generic collection block summaries at department
+   portal level */
+
+/* BEGIN - "homePageLinkCollection-" styles for DepartmentHome.aspx, 
+   SubUnitHome.aspx, etc. */
+
+/* ALERT!  Please note that we style the layout containers for 
+"homePageLinkCollection-" containers in SiteMasterLayout.css */
+
+.homePageLinkCollectionHeader /* generic styles for N-box cases */
+{
+  text-align: center;
+  font-weight: bold;
+  color: #000000;
+  background-color: #999f7f;
+  margin-bottom: 10px;
+}
+
+.homePageLinkCollectionHeader a.linkCollectionHeader:link, a.linkCollectionHeader:visited, a.linkCollectionHeader:hover, a.linkCollectionHeader:active
+{
+  font-weight: bold;
+  text-decoration: none;
+  color: #000000; 
+}
+
+ul.homePageLinkCollectionList
+{
+  /* list-style / margin / padding settings get rid of default bullet points */
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+}
+
+ul.homePageLinkCollectionList li
+{
+  padding-left: 5px;
+}
+
+ul.homePageLinkCollectionList li a:link
+{
+  text-decoration: none; 
+  color: #000099; /* #000099 = navy */
+  font-weight: normal;
+}
+
+ul.homePageLinkCollectionList li a:visited 
+{
+  text-decoration: none; 
+  color: #000099; /* #000099 = navy */
+  font-weight: normal;
+}
+
+ul.homePageLinkCollectionList li a:hover 
+{
+  text-decoration: none; 
+  color: #000000; 
+  font-weight: normal;
+  background-color: #ffff00; /* #ffff00 = yellow; */
+}
+
+ul.homePageLinkCollectionList li a:active 
+{
+  text-decoration: none; 
+  color: #000099; /* #000099 = navy */
+  font-weight: normal;
+}
+
+.homePageLinkCollectionFooter /* generic styles for N-box cases */
+{
+  text-align: center;
+  padding-top: 5px;
+  margin-bottom: 10px;
+  border-top: dashed 1px #999f7f;
+}
+
+/* keep hyperlink effects in synch between list items and footer */
+/* - modifications to "a.linkCollectionFooter" styles necessary to correct problem with
+   default "visited" links styling since Jan 2008 go-live 
+   - additional changes to PortalHomeLinkBoxContainer.ascx and PortalHomeLinkBox.ascx required
+   to apply these styles in a consistent way
+   (EYang, Apr 2008) */
+.homePageLinkCollectionFooter a.linkCollectionFooter:link, a.linkCollectionFooter:visited, a.linkCollectionFooter:hover, a.linkCollectionFooter:active
+{
+  text-decoration: none; 
+  color: #000099; /* #000099=navy */
+  font-weight: normal;
+}
+
+.homePageLinkCollectionFooter a.linkCollectionFooter:hover
+{
+  text-decoration: none; 
+  color: #000000; 
+  font-weight: normal;
+  background-color: #ffff00; /* #ffff00 = yellow; */
+}
+
+.homePageLinkCollectionFooter a.linkCollectionFooter:active
+{
+  text-decoration: none; 
+  color: #000099; /* #000099=navy */
+  font-weight: normal;
+}
+
+/* END - "homePageLinkCollection-" styles */
+
+/* BEGIN - search result styles */
+a.searchResultTitle:link, a.searchResultTitle:visited, a.searchResultTitle:hover, a.searchResultTitle:active
+{
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 1.2em;
+  font-weight: normal;
+  text-decoration: underline;
+  color: #000099; /* #000099 = navy */
+}
+
+.searchUserEntryMatch
+{
+  font-size: 1.0em;
+  font-weight: bold;
+  background-color: #ffff00; /* #ffff00 = yellow; */
+}
+
+.searchDisclaimerText
+{
+  font-size: 0.9em;
+  border-top: solid 1px #999999;
+  margin-top: 50px; /* creates some spacing below the search results */
+}
+/* END - search result styles */
+
+/* BEGIN - text-only site map definitions */
+/* not sure if it's better to do this with BulletedList,
+   so we're just going to use basic text-indentations */
+.siteMapLevel1
+{
+  font-size: 1.0em;
+  font-weight: bold;
+  margin-left: 0px; /* text-indent didn't seem to work! */
+}
+
+.siteMapLevel2
+{
+  margin-left: 10px;
+}
+
+.siteMapLevel3
+{ 
+  margin-left: 20px;
+}
+
+.siteMapLevel4
+{
+  margin-left: 30px;
+}
+
+.siteMapLevel5
+{
+  margin-left: 40px;
+}
+
+/* siteMapLevel1Link defines global menu options */
+a.siteMapLevel1Link:link, a.siteMapLevel1Link:visited, a.siteMapLevel1Link:hover, a.siteMapLevel1Link:active 
+{
+  color: #000000; 
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+/* siteMapLink defines styling for all levels 2, 3, 4, etc. */
+a.siteMapLink:link
+{
+  text-decoration: none; 
+  color: #000099; /* #000099 = navy */
+  font-weight: normal;
+}
+
+a.siteMapLink:visited
+{
+  text-decoration: none; 
+  color: #000099; /* #000099 = navy */
+  font-weight: normal;
+}
+
+a.siteMapLink:hover 
+{
+  text-decoration: underline; 
+  color: #000099; /* #000099 = navy */
+  font-weight: normal;
+}
+
+a.siteMapLink:active
+{
+  text-decoration: none; 
+  color: #000099; /* #000099 = navy */
+  font-weight: normal;
+}
+
+/* END - text-only site map definitions */
+
+/* BEGIN - CalendarEvent styles (primarily for CalendarEventSidebarTable.ascx) */
+.calendarEventSidebarTable
+{
+  font-family: Arial, Verdana;
+  /* font-size: 0.80em; */ /* 0.65 */
+  font-size: 8pt;
+  xxxwidth: 100px;
+}
+
+table.calendarEventSidebarTable tr td
+{
+  vertical-align: top;
+}
+
+td.calendarEventDateDisplay
+{
+  width: 50px;
+}
+
+td.calendarEventNameDisplay
+{
+  width: 100px;
+}
+
+a.calendarEvent:link
+{
+  font-size: 8pt;
+  text-decoration: none; 
+  color: #000099; /* #000099 = navy */ 
+  font-weight: normal
+}
+
+a.calendarEvent:visited 
+{
+  font-size: 8pt;
+  text-decoration: none; 
+  color: #000099; /* #000099 = navy */ 
+  font-weight: normal
+}
+
+a.calendarEvent:link:hover, a.calendarEvent:visited:hover 
+{
+  text-decoration: underline; 
+  color: #000099; /* #000099 = navy */ 
+  font-weight: normal
+}
+
+a.calendarEvent:link:active, a.calendarEvent:visited:active
+{
+  font-size: 8pt;
+  text-decoration: underline; 
+  color: #000099; /* #000099 = navy */ 
+  font-weight: normal
+}
+
+table.eventDetailTable
+{
+  font-family: Arial;
+  font-size: .90em;
+  margin-bottom: 10px;
+}
+
+tr.eventDetailTableHeaderRow
+{
+  font-weight: bold;
+  font-size: 1.4em;
+}
+
+td.eventDetailTableLabel
+{
+  font-weight: bold;
+  margin: 0px;
+  padding: 0px;
+}
+
+/* For SR #128472, introduce officeClosuresDescriptiveText definition for new <p> tags being
+   rendered by OfficeClosureDateSidebarTable.ascx.  Mimics calendarEventSidebarTable for main 
+   font specs.  (EYang, Jan 2013) */
+.officeClosuresDescriptiveText
+{
+  font-family: Arial, Verdana;
+  /* font-size: 0.80em; */ /* 0.65 */
+  font-size: 8pt;
+  margin-top: 3px;
+  margin-bottom: 3px;
+}
+
+/* some styles for new page CalendarEventWebcastMain.aspx (EYang, Jun 2008) */
+/* nested ul-li-a requires that we separate out a:link, a:active, a:visited
+   and a:hover to achieve desired styling AND make sure we don't interfere with
+   other styles */
+.webcastEnabledTextOuterContainer, .webcastDisabledTextOuterContainer
+{
+  /* ALERT!  font-size in em's appears to act as a multiplier when they are defined for nested div's */
+  font-size: 1.1em;
+}
+
+ul.webcastList li a:link
+{
+  text-decoration: none; 
+  color: #000099; /* #000099 = navy */ 
+  font-weight: normal;
+}
+
+ul.webcastList li a:visited 
+{
+  text-decoration: none; 
+  color: #000099; /* #000099 = navy */ 
+  font-weight: normal;
+}
+
+ul.webcastList li a:hover 
+{
+  text-decoration: underline; 
+  color: #000099; /* #000099 = navy */ 
+  font-weight: normal;
+}
+
+/* END - CalendarEvent styles */
+
+
+
+/* BEGIN - styles for ContentPreview.aspx */
+.contentPreviewFolderListing a.actionLink:link
+{
+  font-weight: normal;
+  text-decoration: none;
+  color: #000099; /* #000099 = navy */ 
+}
+
+.contentPreviewFolderListing a.actionLink:visited
+{
+  font-weight: normal;
+  text-decoration: none;
+  color: #000099; /* #000099 = navy */ 
+}
+
+.contentPreviewFolderListing a.actionLink:hover
+{
+  font-weight: normal;
+  text-decoration: underline;
+  color: #000099; /* #000099 = navy */ 
+}
+
+.contentPreviewFolderListing a.actionLink:active
+{
+  font-weight: normal;
+  text-decoration: none;
+  color: #000099; /* #000099 = navy */ 
+}
+
+/* TODO - figure out why still having cascading problems - could not reuse "title" definition
+   here, had to convert to "contentPreviewTitle" to avoid interfering with 
+   .collectionBlockSummaryItem - ANNOYING (EYang, Nov 2007)
+*/
+.contentPreviewFolderListing a.contentPreviewTitle:link, a.contentPreviewTitle:visited, a.contentPreviewTitle:hover, a.contentPreviewTitle:active
+{
+  font-weight: normal;
+  text-decoration: underline;
+  color: #000000; 
+}
+
+.contentPreviewFolderListing div.summaryResultsMsg
+{
+  font-family: Courier;
+  margin-top: 20px;
+  font-weight: normal;
+  color: #000000; /* #000099 = navy */ 
+}
+
+.contentPreviewFolderListing div.summaryResultsNoneFound
+{
+  font-family: Courier;
+  margin-top: 20px;
+  color: Red;
+}
+/* END - styles for ContentPreview.aspx */
+
+/* BEGIN - styles for confirmation messages and errors */
+.statusMessageMasterPageContainer
+{ 
+  /* this style is designed for use with Master Page - use background color
+     to highlight its use for bringing attention to system errors */
+  background-color: #ffffcc; /* ffffcc = yellow, muted */
+}
+
+.statusMessageNormal 
+{
+	font-family: Verdana, Arial, sans-serif;
+	color:  #000099; /* #000099 = navy */ 
+}	
+
+.statusMessageError 
+{
+	font-family: Verdana, Arial, sans-serif;
+	color:  Red;
+}
+
+.statusMessageErrorContainer
+{
+  /* new for CalendarEventWebcastMain.aspx, matches statusMessageMasterPageContainer (EYang, Jun 2008) */
+  background-color: #ffffcc; /* ffffcc = yellow, muted */
+}
+
+a.mailToReportError:link, a.mailToReportError:visited, a.mailToReportError:hover, a.mailToReportError:active
+{
+  text-decoration: underline; 
+  color: #000099; /* #000099 = navy */
+  font-weight: normal;
+}
+
+.htmlSearchResultDisplayError
+{
+  background-color: #ccffff; /* #ccffff = pastel-ish yellow, not the same as stronger highlighting color */
+}
+/* END - styles for confirmation messages and errors */
+
+
+.pageHeaderText
+{
+	font-weight: bold;
+	font-size: fall;
+}

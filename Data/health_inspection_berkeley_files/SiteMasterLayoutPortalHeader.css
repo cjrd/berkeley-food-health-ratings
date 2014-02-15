@@ -1,0 +1,72 @@
+﻿/* Purpose:  SiteMasterLayoutPortalHeader.css...
+   
+   Revision History:
+   -----------------
+   2007-Oct - Initial Release for BerkeleyExtranetSite project.  (EYang)
+*/
+
+/* here, set generic definitions that are all in common with each other for Styles 1-3 */
+.portalHeaderOuterContainerStyle1, .portalHeaderOuterContainerStyle2, .portalHeaderOuterContainerStyle3
+{
+  background-position: top right;
+  background-repeat: no-repeat;
+  background-color: Transparent; /* just in case image doesn't load, then let
+                                    previously defined color show through */  
+  border-bottom: solid 1px #999f7f;
+}
+
+.portalHeaderOuterContainerStyle1
+{
+  min-height: 100px; /* explicit height setting helps work with IE Print Preview
+                    and with Firefox general display */
+  background-image: url('images/besBackground/cityLogo75x75.jpg');
+}
+
+.portalHeaderOuterContainerStyle1 div.portalHeaderTitleImageContainer
+{
+  margin-bottom: 10px; /* creates spacing below title image, 
+                          and above text container */
+}
+
+/* 'Style2' = designed for portal content pages:  smaller city logo with
+   single line of descriptive text */
+.portalHeaderOuterContainerStyle2
+{
+  height: 66px; /* explicit height setting helps work with IE Print Preview
+                   and with Firefox general display */
+  background-image: url('images/besBackground/cityLogo50x50.jpg');
+}
+
+.portalHeaderOuterContainerStyle2 div.portalHeaderTitleImageContainer
+{
+  margin-bottom: 10px; /* creates spacing below title image, 
+                          and above text container */
+}
+
+/* 'Style3' = designed for portal home page variation:  large city logo with
+   single line of descriptive text */
+.portalHeaderOuterContainerStyle3
+{
+  height: 90px; /* explicit height setting helps work with IE Print Preview
+                   and with Firefox general display */
+  background-image: url('images/besBackground/cityLogo75x75.jpg');
+}
+
+.portalHeaderOuterContainerStyle3 div.portalHeaderTitleImageContainer
+{
+  margin-bottom: 25px; /* creates spacing below title image, 
+                          and above text container */
+}
+
+/* remaining definitions apply to 'Styles 1-3' in PortalHeader.ascx */
+.portalHeaderTextContainer
+{
+  padding-left: 0px; /* padding-left affects alignment with title image and with
+                        border-bottom of outer container - which way to go? */
+  margin-bottom: 10px;
+}
+
+.portalHeaderToolbarContainer
+{
+  text-align: right;
+}

@@ -1,0 +1,147 @@
+﻿/* Purpose:  SiteMasterLayoutPrintable.css exists primarily for two reasons:
+
+   1) To hide document elements that should not be visible in Print or Print Preview; the main
+   way to do this is to override definitions in files where media="all" 
+   2) To restate definitions that are in .css files that specify media="screen" but actually 
+   should apply for media="print".
+
+   Great care must be taken to put this .css file toward the bottom of the <head> section,
+   so that the override behaviors occur in the right order.
+   
+   Revision History:
+   -----------------
+   2009-Oct - Added fix for "bleed through" effect due to Ektron DhtmlMenu control.  (EYang, Oct 2009)
+   2008-Feb - Added new debug definitions for troubleshooting Lagan integration
+   issue with "Mozilla" browser window.  The debug definitions were applied
+   to ContentDisplay.aspx to find issue resolution.  (EYang)
+   2008-Jan - Initial Release for BerkeleyExtranetSite project.  (EYang)
+*/
+
+
+
+#GlobalSiteHeaderContainer, #Col1OuterContainer, .contentToolbarContainer
+{
+  display: none;
+} 
+
+/* ALERT!! - these .mnu CSS id's are generated at run-time by Ektron, so it is not possible to see these
+   CSS document id's in the design-time environment.  The only way to figure them out was to load a page
+   into the browser, then use View Source to see what the browser sees.  Also beware that if any 
+   design-time id's in the DhtmlMenu control change, or if we add a new menu, these style definitions 
+   will have to be updated to keep the entire global menu labels hidden during Print or Print Preview. 
+*/
+.mnuHome_roothighText, .mnuResidents_roothighText, .mnuBusinesses_roothighText, .mnuVisitors_roothighText, .mnuServices_roothighText, .mnuGovernment_roothighText
+{
+   /* wow, it took a long time to figure out how to stop the bleed-through effect in 
+      Print or Print Preview, 18+ months since go-live!  All browsers were affected, but
+      the problem appeared to look worst in IE8 when compared with IE6 and Firefox. (EYang, Oct 2009) */
+  display: none;
+}
+
+#Col2OuterContainer 
+{ 
+  width: 100%;
+	background-color: #ffffff;  
+}
+
+#Col2InnerContainer
+{
+	padding: 5px 5px 5px 5px;
+}
+
+/* BEGIN - some necessary duplicate styles between SiteMasterLayout.css
+   and SiteMasterLayoutPrintable.css to preserve consistency of presentation
+   in browser window and in printable form
+*/
+.imageContainerFloatRight
+{
+  float: right;
+  /* margin: 0px 0px 10px 10px; */
+  margin-left: 10px;
+  margin-top: 0px;
+  margin-right: 0px;
+  margin-bottom: 10px;
+}
+/* END - some necessary duplicate styles */
+
+/* BEGIN - More duplicates from SiteMasterLayout.css for "homePageLinkCollection-"
+containers */
+.homePageLinkCollectionsOuterContainer
+{
+  position: relative; 
+  border: solid 0px red; /* activate non-zero border with for testing only */
+  margin-bottom: 10px; /* create some spacing below the link boxes */
+}
+
+.homePageLinkCollectionInnerContainer1of3  /* 3-box case, resolved at run-time
+                                           in PortalHomePageLinkCollection.ascx */
+{
+  position: relative; /* only column 1 should be relatively positioned to stay
+                         in document flow, let its height determine height for
+                         the entire set */
+  left: 0%; 
+  top: 0px; 
+}
+
+.homePageLinkCollectionInnerContainer2of3 /* 3-box case, resolved at run-time
+                                          in PortalHomePageLinkCollection.ascx */
+{
+  position: absolute; 
+  left: 34%; 
+  top: 0px; 
+}
+
+.homePageLinkCollectionInnerContainer3of3 /* 3-box case, resolved at run-time
+                                          in PortalHomePageLinkCollection.ascx */
+{
+  position: absolute; 
+  left: 68%; 
+  top: 0px; 
+}
+
+.homePageLinkCollectionBoxSetof3 /* generic styles for 3-box cases */
+{
+  border: solid 0px #000000; /* activate non-zero border width for testing only */
+  width: 223px; /* uniform widths for 3-box case */
+}
+
+
+.homePageLinkCollectionInnerContainer1of2  /* 2-box case, resolved at run-time
+                                          in PortalHomePageLinkCollection.ascx */
+{
+  position: relative; /* only column 1 should be relatively positioned to stay
+                         in document flow, let its height determine height for
+                         the entire set */
+  left: 0%; 
+  top: 0px; 
+}
+
+.homePageLinkCollectionInnerContainer2of2 /* 2-box case, resolved at run-time
+                                          in PortalHomePageLinkCollection.ascx */
+{
+  position: absolute; 
+  left: 51%; 
+  top: 0px; 
+}
+
+.homePageLinkCollectionBoxSetof2 /* generic styles for 2-box cases */
+{
+  border: solid 0px #000000; /* activate non-zero border with for testing only */
+  width: 343px; /* uniform widths for 2-box case */
+}
+
+/* END - duplicates for "homePageLinkCollection-" styles */
+
+/* TEMP DEBUGGING - 2-5-08 (duplicated between SiteMasterLayout.css
+   and SiteMasterLayoutPrintable.css) */
+.debugShow
+{
+  display: block;
+  visibility: visible;
+}
+
+.debugHide
+{
+  display: none;
+  visibility: hidden;
+}

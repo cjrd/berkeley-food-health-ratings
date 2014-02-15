@@ -1,0 +1,544 @@
+/* Purpose:  SiteMasterLayout.css defines universal layout-related styles 
+   for the site in terms of background colors, page width, and multi-column layouts
+
+   NOTE:  For the most part, we totally separate layout-related
+   styles from font-related styles.  SiteMasterLayout.css should not 
+   contain any font definitions except for extremely limited exceptions.
+
+   Complementary layout files:
+   * SiteMasterLayout2Col.css for 2-column layouts
+   * SiteMasterLayout3Col.css for 3-column layouts
+   
+   Revision History:
+   -----------------
+   2012-Aug - Post-Ektron 8.5 upgrade fix #5, per CR #1731.  Removed some
+   class definitions for .InternetExplorer7, .InternetExplorer8 that are
+   no longer needed.  Also, server-specific coloring definitions for 
+   PortalMasterAlert.ascx are moved to SiteMasterLayoutEnvironment.css.  (EYang)
+   2012-Feb - Added styles for PortalMasterAlert.ascx enabling some form of 
+   global messaging for the first time.  (EYang)
+   2011-Aug - Added imageContainerFloatLeft definition, which had been tested on another web site
+   and never needed on this web site until introduction of CrmRequestParkingMachine.aspx.  (EYang)
+   2009-Sep - Removed z-index setting to clear up display problem with
+   AutoCompleteExtender control. (EYang)
+   2009-May - Added generic dataTable definitions, first usage of div-based 
+   layouts of UI controls in BerkeleyExtranetSite project.  (EYang)
+   2008-Jun - Additions for new page CalendarEventWebcastMain.aspx.  (EYang)
+   2008-Feb - Added new debug definitions for troubleshooting Lagan integration
+   issue with "Mozilla" browser window.  The debug definitions were applied
+   to ContentDisplay.aspx to find issue resolution.  (EYang)
+   2008-Jan - Initial Release for BerkeleyExtranetSite project.  (EYang)
+*/
+
+html 
+{
+}
+
+body
+{
+  margin: 0px;
+  padding: 0px;
+
+  width: auto; /* auto-width at <body> level sets up auto-margins for entire site;
+                  see MasterBodyOuterContainer for more notes */
+  
+  /* overall site design is olive-colored background with multi-column
+     layout overlaid on top of it; color #999f7f is not web safe, so
+     it's better to implement this color as an image rather than
+     background-color definition */
+  background-image: url('images/besBackground/siteMasterLayoutBodyOlive.gif');
+  background-position: top right;
+  background-repeat: repeat-y;
+
+	/* you can activate background-color for debugging only, but production 
+     implementation includes background image with color for the left and
+     right gutters of all pages, so background-color definition is mostly 
+     redundant (would only show up if user's screen exceeded image
+     width, or sometimes shows up when HTML-wrapping errors show 
+     up) (EYang, Dec 2007) 
+  */
+  xxxbackground-color: #999f7f; /* olive-colored background
+                               that sits behind white-colored columns
+                               and main body of all pages doesn't cover 
+                               the entire background on wide screens */
+
+}
+
+div 
+{ 
+}
+
+/* id="MasterBodyOuterContainer" defined in .Master files */
+#MasterBodyOuterContainer
+{
+  /* ALERT!  use of margin-left, margin-right, and width is the preferred way
+  to horizontally center the entire web site according to Ch. 3 of the 
+  Zen Garden book.  As of Jan 2008, we consider usage of browsers that do not
+  support auto-margins to be negligible.  See external documentation.
+  (EYang, Jan 2008) */
+  margin-left: auto;
+  margin-right: auto;
+  width: 920px; /* 920px accommodates 1/16/08 version of background images; please
+                   note that the 2-col and 3-col .css layout files
+                   contain the actual background image references that
+                   create illusion of multi-column layout */
+}
+
+/* id="PortalMasterAlertMessageOuterContainer" defined in PortalMasterAlert.ascx,
+enabling some form of global messaging for the first time (EYang, Feb 2012) */
+#PortalMasterAlertMessageOuterContainer
+{
+  width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  
+  /* server-specific coloring definitions for are moved to 
+  SiteMasterLayoutEnvironment.css (EYang, Aug 2012) */
+  /* background-color: #000000; */
+  /* color: #ffffff; */
+  /* font-weight: bold; */
+}
+
+#PortalMasterAlertMessageInnerContainer
+{
+  xxxpadding: 5px;
+}
+
+#PortalMasterAlertMessageInnerContainer p
+{
+  padding: 2px;
+  margin: 0px;
+}
+
+
+/* id="GlobalBannerContainer" defined in GlobalSiteHeader.ascx */
+#GlobalBannerContainer
+{
+  /* BEGIN - centering of this container within MasterBodyOuterContainer
+     (narrower width clears the drop shadows in the gutter) */
+  margin-left: auto;
+  margin-right: auto;
+  width: 900px;
+  /* END - centering of this container within MasterBodyOuterContainer */
+  
+  height: 75px; /* height of container must equal height of background 
+                   image EXACTLY */
+  /* background: #999f7f url('images/besBackground/globalSiteHeader.jpg') no-repeat; */
+  background-image: url('images/besBackground/globalSiteHeader.jpg');
+  background-repeat: no-repeat;
+  background-color: Transparent; /* just in case image doesn't load, then let
+                                    previously defined color show through */  
+}
+
+/* id="GlobalMenuContainer" defined in GlobalSiteHeader.ascx */
+#GlobalMenuContainer
+{
+  xxxposition: relative; /* sets anchor point for placeholders (EYang, Aug 2012) */
+  /* BEGIN - centering of this container within MasterBodyOuterContainer
+     (narrower width clears the drop shadows in the gutter) */
+  margin-left: auto;
+  margin-right: auto;
+  width: 900px;
+  /* END - centering of this container within MasterBodyOuterContainer */
+
+  height: 25px; /* FF change, 25px with relative-top positioning = 3px had 
+                   been looking great in IE6 (EYang, Dec 2007) */
+  background-color: #660000; /* global menu text is white on maroon background */
+}
+
+/* BEGIN - styling for <ul> and <li> elements horizontally using an approach published
+   at http://www.alistapart.com/stories/taminglists; if comparing our work 
+   here with the "Taming Lists" article, bear in mind that we've renamed
+   the outer and inner div elements to conform with our local standards 
+   (EYang, Jan 2008)
+*/
+#FlexPlaceholdersOuterContainer
+{
+  display: none; /* ABANDON - per CR #xxx we wanted to support vertical tic marks some other way besides
+                    the .css / .xsl provided by Ektron because of extra hacks required for
+                    IE 7 and IE 8, but it's not working out so abandon for now (EYang, Aug 2012)
+                 */
+  position: absolute; /* remove placeholders from document flow to overlay above FlexMenu (EYang, Aug 2012) */
+  z-index: 500;
+
+  left: 10px;
+  width: 890px;/* 890 = full width of page minus padding */
+  xxxbackground-color: #660000; /* global menu text is white on maroon background */
+  height: 18px; 
+
+  /* required definition for CSS-horizontal lists */
+  padding: 5px; 
+}
+
+#FlexPlaceholdersInnerContainer
+{
+  position: relative; 
+}
+
+#FlexPlaceholdersInnerContainer ul
+{
+  margin-left: 0;
+  padding-left: 0;
+  display: inline;
+}
+
+#FlexPlaceholdersInnerContainer ul li
+{
+  margin-left: 0;
+  padding: 3px 33px; /* 3px 15px; */
+  border-left: 1px solid #999f7f; /* 999f7f = olive, matches site background */
+  list-style: none;
+  display: inline;
+  color: #660000; /* match font color to background color, so you can't actually see the words */
+}
+
+#FlexPlaceholdersInnerContainer ul li.firstItem
+{
+  margin-left: 0;
+  padding: 3px 40px; /* 3px 56px; */
+  border-left: none;
+  list-style: none;
+  display: inline; 
+  /* vertical offset required for... */
+  /* position: relative;
+  top: 11px; */
+}
+/* END - styling for <ul> and <li> elements horizontally */
+
+/* id="GlobalSearchContainer" defined in GlobalSiteHeader.ascx */
+#GlobalSearchContainer
+{
+  /* BEGIN - centering of this container within MasterBodyOuterContainer
+     (narrower width clears the drop shadows in the gutter) */
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 3px;
+  width: 900px;
+  /* END - centering of this container within MasterBodyOuterContainer */
+
+  height: 30px; /* 30px, changed from 26px, slightly reduces the chance
+                   of inadvertently triggering global menu dropdown when pointing 
+                   mouse at search textbox */
+  /* 000066 = royal-blue, reviewed by SLC (BLavin, Oct 2007) */
+  /* 666666 = dark gray, proposed (EYang, Dec 2007) */
+  /* 000033 = darker blue, proposed (BLavin, Dec 2007) */
+  background-color: #000033; 
+}
+
+/* id="ColumnSetOuterContainer" defined in .Master files */
+#ColumnSetOuterContainer
+{
+  /* BEGIN - centering of this container within MasterBodyOuterContainer
+     (narrower width clears the drop shadows in the gutter) */
+  margin-left: auto;
+  margin-right: auto;
+  width: 900px;
+  /* END - centering of this container within MasterBodyOuterContainer */
+  
+  position: relative; /* required for absolute positioning of individual
+                         containers for Col1-Col3 */
+  clear: both;
+}
+
+/* id="Col1OuterContainer" defined in .Master files */
+#Col1OuterContainer
+	{
+  position: absolute; /* FF change - Col2 is the only one in document flow (EYang, Dec 2007) */
+  top: 0px;
+	width: 165px; /* width matches width in background image */
+  
+	/* you can activate background-color for debugging only, but production 
+     implementation includes background image with color of *this* column,
+     so background-color definition is redundant  */
+	/* background-color: #660000;*/	
+	}
+
+/* id="Col1InnerContainer" defined in .Master files */
+#Col1InnerContainer
+{
+	padding: 5px 5px 5px 5px;
+	/* z-index: 100; */
+}
+
+/* id="Col2OuterContainer" defined in .Master files */
+#Col2OuterContainer 
+{ 
+  position: relative;  /* FF change - Col2 is the only one in document flow (EYang, Dec 2007) */
+  left: 165px; /* left edge of Col2 matches width of Col1 */
+  top: 0px;
+  width: 735px; /* FF change - beware how "left=" attribute relates to "width=",
+                   then width of MasterBodyOuterContainer (EYang, Dec 2007) */
+
+  /* disabling z-index setting is necessary to make AutoCompleteExtender control display
+     properly; testing 3-col page (Home.aspx) shows that whatever condition
+     we saw in Firefox at the time, Dec 2007, no longer exists in FF Version 3.x. (EYang, Sep 2009) */
+	xxxz-index: 1; /* FF change - Col2OuterContainer overlaps Col3, so 
+                 set z-index to make sure Col3 hyperlinks and controls show through 
+                 (EYang, Dec 2007) */	
+}
+
+/* id="Col2InnerContainer" defined in .Master files */
+#Col2InnerContainer
+{
+  position: relative;
+  left: 0px;
+  top: 0px;
+	/* width of Col2 varies by 2-Col and 3-Col cases, see complementary layout files */
+  /* width: ????px; */
+	padding: 5px 5px 5px 5px;
+	
+	/* you can activate background-color for debugging only, but production 
+     implementation includes background image with color of *this* column,
+     so background-color definition is redundant  */
+	/* background-color: #ffffff;*/
+	
+}
+
+/* id="Col2Footer" defined in .Master files */
+#Col2Footer
+{
+  /* FF change - Col2 is the only one in document flow;
+    thus, we rely on the footer definition with height set 
+    artificially high to make sure it vertically spans 
+    the height of cols 1 & 3 (EYang, Dec 2007) */
+  height: 768px;  /* we've heard some complaints about 1024; let's try
+                     768 for now (EYang, Jan 2008) */
+}
+
+/* BEGIN - search control definitions from prototype (11th hour
+   changes for September 2007 go-live) */
+.searchControl /* not sure why, but attempt to move this to local <style> 
+                  tag in .ascx file for search box did not work */
+{
+  font-size: 8pt;
+}
+
+label.searchControl /* not sure why, but attempt to move this to local <style> 
+                       tag in .ascx file for search box did not work */
+{
+  color: #ffffff;
+  font-weight: bold;
+}
+/* END - search control definitions from prototype */
+
+/* BEGIN - "homePageLinkCollection-" styles for DepartmentHome.aspx (and others?) */
+/* - the basic premise is to position a row of 2 or 3 <div> tags 
+horizontally within homePageLinkCollectionsOuterContainer by using
+a combination of relative and absolute positioning; please turn on
+border attributes to debug. (EYang, Oct 2007) */
+
+/* ALERT!  Please note that we style the text contents of "homePageLinkCollection-"
+containers in SiteMasterFonts.css */
+.homePageLinkCollectionsOuterContainer
+{
+  position: relative; 
+  border: solid 0px red; /* activate non-zero border with for testing only */
+  margin-bottom: 10px; /* create some spacing below the link boxes */
+}
+
+.homePageLinkCollectionInnerContainer1of3  /* 3-box case, resolved at run-time
+                                           in PortalHomePageLinkCollection.ascx */
+{
+  position: relative; /* only column 1 should be relatively positioned to stay
+                         in document flow, let its height determine height for
+                         the entire set */
+  left: 0%; 
+  top: 0px; 
+}
+
+.homePageLinkCollectionInnerContainer2of3 /* 3-box case, resolved at run-time
+                                          in PortalHomePageLinkCollection.ascx */
+{
+  position: absolute; 
+  left: 34%; 
+  top: 0px; 
+}
+
+.homePageLinkCollectionInnerContainer3of3 /* 3-box case, resolved at run-time
+                                          in PortalHomePageLinkCollection.ascx */
+{
+  position: absolute; 
+  left: 68%; 
+  top: 0px; 
+}
+
+.homePageLinkCollectionBoxSetof3 /* generic styles for 3-box cases */
+{
+  border: solid 0px #000000; /* activate non-zero border width for testing only */
+  width: 223px; /* uniform widths for 3-box case */
+}
+
+
+.homePageLinkCollectionInnerContainer1of2  /* 2-box case, resolved at run-time
+                                          in PortalHomePageLinkCollection.ascx */
+{
+  position: relative; /* only column 1 should be relatively positioned to stay
+                         in document flow, let its height determine height for
+                         the entire set */
+  left: 0%; 
+  top: 0px; 
+}
+
+.homePageLinkCollectionInnerContainer2of2 /* 2-box case, resolved at run-time
+                                          in PortalHomePageLinkCollection.ascx */
+{
+  position: absolute; 
+  left: 51%; 
+  top: 0px; 
+}
+
+.homePageLinkCollectionBoxSetof2 /* generic styles for 2-box cases */
+{
+  border: solid 0px #000000; /* activate non-zero border with for testing only */
+  width: 343px; /* uniform widths for 2-box case */
+}
+
+/* END - "homePageLinkCollection-" styles */
+
+/* BEGIN - some necessary duplicate styles between SiteMasterLayout.css
+   and SiteMasterLayoutPrintable.css to preserve consistency of presentation
+   in browser window and in printable form
+*/
+.imageContainerFloatLeft
+{
+  float: left;
+  display: inline; /* FF change - "display" value produces better results than
+                      "float" alone (EYang, Dec 2007) */
+  xxxtext-align: right;
+  /* margin: 0px 0px 10px 10px; */
+  margin-left: 5px; /* spacing to pageSectionOuterContainer */
+  margin-right: 10px; /* 10px = original prior to accessibility testing */
+  margin-top: 0px;
+  margin-bottom: 10px;
+}
+
+.imageContainerFloatRight
+{
+  float: right;
+  display: inline; /* FF change - "display" value produces better results than
+                      "float" alone (EYang, Dec 2007) */
+  xxxtext-align: right;
+  /* margin: 0px 0px 10px 10px; */
+  margin-left: 5px; /* 10px = original prior to accessibility testing */
+  margin-top: 0px;
+  margin-right: 0px;
+  margin-bottom: 10px;
+}
+
+/* END - some necessary duplicate styles */
+
+/* BEGIN - generic dataTable definitions, first usage of div-based layouts of UI controls
+   on BerkeleyExtranetSite project.  Prior success in LaganIntegration project. (EYang, May 2009)
+*/
+.dataTable
+{
+  /* any styles defined at table level? */
+}
+
+.dataRow
+{
+  margin: 0px;
+  padding: 0px;
+  width: 100%; /* not sure what's so magical about 98.5% */
+}
+
+.dataLabel
+{
+  /* simulation of 'column 1' always contains a static data label */
+  float: left;
+  margin: 0px;
+  padding: 0px;  
+}
+
+.dataValue
+{
+  /* simulation of 'column 2' always contains a data value */
+  float: left;
+  margin: 0px;
+  padding: 0px;  
+}
+
+.floatClearer
+{
+  /* recommendation by Eric Meyer's Complex Spiral article 
+     at http://complexspiral.com/publications/containing-floats/;
+     an empty div tag with this class is needed after .dataTable */
+  clear: left;
+  line-height: 0;
+  height: 0;
+}
+/* END - generic dataTable definitions */
+
+/* TODO - should webcast styles be moved into a separate .css files that we dynamically append
+   to .Master at run-time?  We have a better idea how to dynamically append .css files now.  
+   (EYang, May 2009) */
+/* BEGIN - layout styling for CalendarEventWebcastMain.aspx (EYang, Jun 2008) */
+.webcastEnabledTextOuterContainer
+{
+  margin-top: 10px;
+  background-color: #ffffcc; /* ffffcc = yellow, muted */
+  padding: 5px;
+}
+
+.webcastEnabledTextOuterContainer .imageContainerFloatRight
+{
+  width: 120px;
+  height: 80px;
+  background-image: url('images/besGeneral/liveWebcast.jpg');
+  background-position: top right;
+  background-repeat: repeat-y;
+}
+
+.webcastDisabledTextOuterContainer
+{
+  margin-top: 10px;
+  background-color: #cccccc; /* cccccc = very light gray */
+  padding: 5px;
+}
+
+.webcastDisabledTextOuterContainer .imageContainerFloatRight
+{
+  width: 78px;
+  height: 82px;
+  background-image: url('images/besGeneral/hourGlass.jpg');
+  background-position: top right;
+  background-repeat: repeat-y;
+}
+
+.webcastEnabledControlsOuterContainer
+{
+  background-color: #ffffcc; /* ffffcc = yellow, muted */
+  /* width: auto; */ /* width does not work for centering the controls in the inner container */
+  padding: 5px;
+}
+
+.webcastDisabledControlsOuterContainer
+{
+  background-color: #cccccc; /* cccccc = very light gray */
+  /* width: auto; */ /* width does not work for centering the controls in the inner container */
+  padding: 5px;
+}
+
+.webcastVideoControlsInnerContainer
+{
+  /* margin-left: auto; */ /* margin-left does not work for centering the controls */
+  /* margin-right: auto; */ /* margin-right does not work for centering the controls */
+  text-align: center;
+  padding: 5px;
+}
+
+/* END - layout styling for CalendarEventWebcastMain.aspx */
+
+/* TEMP DEBUGGING - 2-5-08 (duplicated between SiteMasterLayout.css
+   and SiteMasterLayoutPrintable.css) */
+.debugShow
+{
+  display: block;
+  visibility: visible;
+}
+
+.debugHide
+{
+  display: none;
+  visibility: hidden;
+}

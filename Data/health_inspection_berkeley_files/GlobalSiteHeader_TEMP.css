@@ -1,0 +1,102 @@
+﻿/* Purpose:  GlobalSiteHeader_TEMP.css defines the positioning for elements
+   contained within GlobalSiteHeader_TEMP.ascx.  These definitions are not 
+   meant for ANY other purpose.
+
+   Revision History:
+   -----------------
+   2008-Feb - Minor tweaks and a bit of trickery to enable DhtmlMenu control
+   for non-IE users.  (EYang)
+   2008-Jan - Initial Release for BerkeleyExtranetSite project.  (EYang)
+*/
+
+/* BEGIN - styling for <ul> and <li> elements horizontally using an approach published
+   at http://www.alistapart.com/stories/taminglists; if comparing our work 
+   here with the "Taming Lists" article, bear in mind that we've renamed
+   the outer and inner div elements to conform with our local standards 
+   (EYang, Jan 2008)
+*/
+#GlobalMenuOuterContainer
+{
+  position: relative; /* change to relative / left=200px / width=900px 
+                         accommodates shadow background image (EYang, Dec 2007) */
+  left: 10px;
+  width: 890px;/* 890 = full width of page minus padding */
+  background-color: #660000; /* global menu text is white on maroon background */
+  height: 18px; 
+
+  /* required definition for CSS-horizontal lists */
+  padding: 5px; 
+}
+
+#GlobalMenuInnerContainer
+{
+  position: relative; /* enables absolute positioning of Ektron's DhtmlMenu control
+                         (inline styling required, see .ascx module) */
+}
+
+#GlobalMenuInnerContainer ul
+{
+  margin-left: 0;
+  padding-left: 0;
+  display: inline;
+}
+
+#GlobalMenuInnerContainer ul li
+{
+  margin-left: 0;
+  padding: 3px 33px; /* 3px 15px; */
+  border-left: 1px solid #999f7f; /* 999f7f = olive, matches site background */
+  list-style: none;
+  display: inline;
+}
+
+#GlobalMenuInnerContainer ul li.firstItem
+{
+  margin-left: 0;
+  padding: 3px 56px; /* 3px 15px; */
+  border-left: none;
+  list-style: none;
+  display: inline; 
+  /* vertical offset required for... */
+  /* position: relative;
+  top: 11px; */
+}
+/* END - styling for <ul> and <li> elements horizontally */
+
+a.globalMenuTemp:link
+{
+  font-size: 12pt;
+  font-weight: normal;
+  text-decoration: none;
+  color: #ffffff;
+}
+
+a.globalMenuTemp:visited
+{
+  font-size: 12pt;
+  font-weight: normal;
+  text-decoration: none;
+  color: #ffffff;
+}
+
+a.globalMenuTemp:hover
+{
+  font-size: 12pt;
+  font-weight: normal;
+  text-decoration: none;
+  color: #ffff00; /* #ffff00 = yellow; */
+}
+
+a.globalMenuTemp:active
+{
+  font-size: 12pt;
+  font-weight: normal;
+  text-decoration: none;
+  color: #ffffff;
+}
+
+.globalMenu_DUMMY
+{
+  color: #660000; /* #660000 = maroon; yes, we make it same as menu bar background
+                     on purpose, see GlobalSiteHeader_TEMP.ascx code-behind for more info */
+}

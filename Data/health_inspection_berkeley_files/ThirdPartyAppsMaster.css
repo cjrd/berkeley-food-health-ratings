@@ -1,0 +1,354 @@
+/* Purpose:  ThirdPartyAppsMaster.css is...
+
+   REMINDER:  Best to apply edits to ThirdPartyAppsMaster.css directly on
+   production server, as the strategy is to post samples referencing
+   fully qualified URL at all times.  In other words, there is no benefit to
+   editing ThirdPartyAppsMaster.css locally as it cannot be unit tested there
+   anyway.
+
+   Revision History
+   ----------------
+   2013-May - Added several images in support of Public Safety, per SR #133678.  (EYang)
+   2013-Feb - Added 'Business' header to PortalHeader definitions.  This change is required
+   for the Accela / Business Licensing project  Also, reordered these named containers
+   into alphabetical order to make them easier to find.  (EYang)
+   2010-Apr - Added Toxics Management Division to PortalHeader definitions.  (EYang)
+   2009-Dec - Added Police to PortalHeader definitions.  (NMehta)
+   2009-Jul - Added Community Calendar to PortalHeader definitions.  Alphabetized
+   latest entries to PortalHeader definitions.  (EYang)
+   2009-Jan - Misc updates through May 2009.  (NMehta)
+   2008-May - Initial release.  (EYang)
+*/
+
+/* Assumes majority of layout accomplished by series of .css files sitting in the root of the
+City of Berkeley public web site.  Thus, the CSS definitions below are customizations that
+are 100% intended for 3rd party applications only, and not for the public web site itself.
+The main benefit of doing this is that we can completely localize background image filenames
+and paths from the application that uses these CSS definitions.  Very cool!  (EYang, May 2008)
+*/
+
+/* BEGIN - overrides of GlobalSiteHeader_TEMP.css */
+#GlobalMenuInnerContainer ul li
+{
+  padding: 3px 32px; /* original spacing in GlobalSiteHeader_TEMP.css was for getting Ektron's
+                        DhtmlMenu to align correctly; here, we alter it for static HTML text
+                        because "Elected Officials" text was causing unexpected word wrapping */
+}
+/* END - overrides of GlobalSiteHeader_TEMP.css */
+
+/* BEGIN - set up image references for LHS menus (on main web site,
+   we actually reference .gif & .jpg filenames directly) */
+#SidebarMenuImageContainerWelcome /* 'Welcome' = standardized default, always at top */
+{
+  background-image: url('images/besSidebar/redWelcome.gif');
+  background-position: top left;
+  background-repeat: no-repeat;
+  background-color: Transparent; /* just in case image doesn't load, then let
+                                    previously defined color show through */
+
+  height: 30px;
+}
+
+#SidebarMenuImageContainerPopularTopics /* 'Popular Topics' = standardized default, usually below Welcome */
+{
+  background-image: url('images/besSidebar/redPopularTopics.gif');
+  background-position: top left;
+  background-repeat: no-repeat;
+  background-color: Transparent; /* just in case image doesn't load, then let
+                                    previously defined color show through */
+
+  height: 30px;
+}
+
+#SidebarMenuImageContainerQuickLinks /* 'Quick Links' = standardized default, usually below Popular Topics */
+{
+  background-image: url('images/besSidebar/redQuickLinks.gif');
+  background-position: top left;
+  background-repeat: no-repeat;
+  background-color: Transparent; /* just in case image doesn't load, then let
+                                    previously defined color show through */
+
+  height: 30px;
+}
+
+#SidebarMenuImageContainerWhatsNew /* 'What's New' = standardized default, usually below Quick Links */
+{
+  background-image: url('images/besSidebar/redWhatsNew.gif');
+  background-position: top left;
+  background-repeat: no-repeat;
+  background-color: Transparent; /* just in case image doesn't load, then let
+                                    previously defined color show through */
+
+  height: 30px;
+}
+
+#SidebarMenuImageContainerEmployment /* 'Employment' = custom header for HR (per NEOGOV project) */
+{
+  background-image: url('images/besSidebar/redEmployment.gif');
+  background-position: top left;
+  background-repeat: no-repeat;
+  background-color: Transparent; /* just in case image doesn't load, then let
+                                    previously defined color show through */
+
+  height: 30px;
+}
+
+#SidebarMenuImageContainerJobs /* 'Jobs' = placeholder - not used by HR for now (EYang, Oct 2008) */
+{
+  background-image: url('images/besSidebar/redJobs.gif');
+  background-position: top left;
+  background-repeat: no-repeat;
+  background-color: Transparent; /* just in case image doesn't load, then let
+                                    previously defined color show through */
+
+  height: 30px;
+}
+
+#SidebarMenuImageContainerJobInfo /* 'Job Info' = placeholder - not used by HR for now (EYang, Oct 2008)  */
+{
+  background-image: url('images/besSidebar/redJobInfo.gif');
+  background-position: top left;
+  background-repeat: no-repeat;
+  background-color: Transparent; /* just in case image doesn't load, then let
+                                    previously defined color show through */
+
+  height: 30px;
+}
+
+/* END - set up image references for LHS menus */
+
+/* BEGIN - set up image references for portal header - see 'portalHeaderOuterContainer' */
+#PortalHeaderImageContainerBHA
+{
+  background-image: url('images/besPortalHeader/BerkeleyHousingAuthority.gif');
+  background-position: top left;
+  background-repeat: no-repeat;
+  background-color: Transparent; /* just in case image doesn't load, then let
+                                    previously defined color show through */
+
+  height: 45px;
+}
+
+#PortalHeaderImageContainerBuildingAndSafety
+{
+  background-image: url('images/besPortalHeader/BuildingAndSafety.gif');
+  background-position: top left;
+  background-repeat: no-repeat;
+  background-color: Transparent; /* just in case image doesn't load, then let
+                                    previously defined color show through */
+
+  height: 45px;
+}
+
+#PortalHeaderImageContainerBusinesses
+{
+  background-image: url('images/besPortalHeader/Businesses.gif');
+  background-position: top left;
+  background-repeat: no-repeat;
+  background-color: Transparent; /* just in case image doesn't load, then let
+                                    previously defined color show through */
+
+  height: 45px;
+}
+
+#PortalHeaderImageContainerCMO
+{
+  background-image: url('images/besPortalHeader/CityManager.gif');
+  background-position: top left;
+  background-repeat: no-repeat;
+  background-color: Transparent; /* just in case image doesn't load, then let
+                                    previously defined color show through */
+
+  height: 45px;
+}
+
+#PortalHeaderImageContainerCityClerk
+{
+  background-image: url('images/besPortalHeader/CityClerk.gif');
+  background-position: top left;
+  background-repeat: no-repeat;
+  background-color: Transparent; /* just in case image doesn't load, then let
+                                    previously defined color show through */
+
+  height: 45px;
+}
+
+#PortalHeaderImageContainerClerk
+{
+  background-image: url('images/besPortalHeader/City.gif');
+  background-position: top left;
+  background-repeat: no-repeat;
+  background-color: Transparent; /* just in case image doesn't load, then let
+                                    previously defined color show through */
+
+  height: 45px;
+}
+
+#PortalHeaderImageContainerCommunityCalendar
+{
+  background-image: url('images/besPortalHeader/CommunityCalendar.gif');
+  background-position: top left;
+  background-repeat: no-repeat;
+  background-color: Transparent; /* just in case image doesn't load, then let
+                                    previously defined color show through */
+
+  height: 45px;
+}
+
+#PortalHeaderImageContainerEnvironmentalHealth
+{
+  background-image: url('images/besPortalHeader/EnvironmentalHealth.gif');
+  background-position: top left;
+  background-repeat: no-repeat;
+  background-color: Transparent; /* just in case image doesn't load, then let
+                                    previously defined color show through */
+
+  height: 45px;
+}
+
+#PortalHeaderImageContainerFireDepartment /* added per SR #133678 (EYang, May 2013) */
+{
+  background-image: url('images/besPortalHeader/FireDepartment.gif');
+  background-position: top left;
+  background-repeat: no-repeat;
+  background-color: Transparent; /* just in case image doesn't load, then let
+                                    previously defined color show through */
+
+  height: 45px;
+}
+
+#PortalHeaderImageContainerGeneralInformation
+{
+  background-image: url('images/besPortalHeader/GeneralInformation.gif');
+  background-position: top left;
+  background-repeat: no-repeat;
+  background-color: Transparent; /* just in case image doesn't load, then let
+                                    previously defined color show through */
+
+  height: 45px;
+}
+
+#PortalHeaderImageContainerHumanResources
+{
+  background-image: url('images/besPortalHeader/HumanResources.gif');
+  background-position: top left;
+  background-repeat: no-repeat;
+  background-color: Transparent; /* just in case image doesn't load, then let
+                                    previously defined color show through */
+
+  height: 45px;
+}
+
+#PortalHeaderImageContainerInformationTechnology
+{
+  background-image: url('images/besPortalHeader/InformationTechnology.gif');
+  background-position: top left;
+  background-repeat: no-repeat;
+  background-color: Transparent; /* just in case image doesn't load, then let
+                                    previously defined color show through */
+
+  height: 45px;
+}
+
+#PortalHeaderImageContainerOnlineServiceCenter /* added per SR #133678 (EYang, May 2013) */
+{
+  background-image: url('images/besPortalHeader/OnlineServiceCenter.gif');
+  background-position: top left;
+  background-repeat: no-repeat;
+  background-color: Transparent; /* just in case image doesn't load, then let
+                                    previously defined color show through */
+
+  height: 45px;
+}
+
+
+#PortalHeaderImageContainerParksRecreationAndWaterfront
+{
+  background-image: url('images/besPortalHeader/ParksRecreationAndWaterfront.jpg');
+  background-position: top left;
+  background-repeat: no-repeat;
+  background-color: Transparent; /* just in case image doesn't load, then let
+                                    previously defined color show through */
+
+  height: 45px;
+}
+
+#PortalHeaderImageContainerPlanning
+{
+  background-image: url('images/besPortalHeader/PlanningAndDevelopment.gif');
+  background-position: top left;
+  background-repeat: no-repeat;
+  background-color: Transparent; /* just in case image doesn't load, then let
+                                    previously defined color show through */
+
+  height: 45px;
+}
+
+#PortalHeaderImageContainerPolice
+{
+  background-image: url('images/besPortalHeader/BerkeleyPoliceDepartment.gif');
+  background-position: top left;
+  background-repeat: no-repeat;
+  background-color: Transparent; /* just in case image doesn't load, then let
+                                    previously defined color show through */
+
+  height: 45px;
+}
+
+#PortalHeaderImageContainerRent
+{
+  background-image: url('images/besPortalHeader/RentStabilizationBoard.gif');
+  background-position: top left;
+  background-repeat: no-repeat;
+  background-color: Transparent; /* just in case image doesn't load, then let
+                                    previously defined color show through */
+
+  height: 45px;
+}
+
+
+#PortalHeaderImageContainerRECO
+{
+  background-image: url('images/besPortalHeader/energyandsustainabledevelop.gif');
+  background-position: top left;
+  background-repeat: no-repeat;
+  background-color: Transparent; /* just in case image doesn't load, then let
+                                    previously defined color show through */
+
+  height: 45px;
+}
+
+#PortalHeaderImageContainerRentStabilizationBoard
+{
+  background-image: url('images/besPortalHeader/RentStabilizationBoard.gif');
+  background-position: top left;
+  background-repeat: no-repeat;
+  background-color: Transparent; /* just in case image doesn't load, then let
+                                    previously defined color show through */
+
+  height: 45px;
+}
+
+#PortalHeaderImageContainerSearch
+{
+  background-image: url('images/besPortalHeader/Search.gif');
+  background-position: top left;
+  background-repeat: no-repeat;
+  background-color: Transparent; /* just in case image doesn't load, then let
+                                    previously defined color show through */
+
+  height: 50px;
+}
+
+#PortalHeaderImageContainerToxics
+{
+  background-image: url('images/besPortalHeader/Toxics.gif');
+  background-position: top left;
+  background-repeat: no-repeat;
+  background-color: Transparent; /* just in case image doesn't load, then let
+                                    previously defined color show through */
+
+  height: 45px;
+}
+
+/* END - set up image references for portal header */

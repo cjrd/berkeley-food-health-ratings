@@ -1,0 +1,36 @@
+﻿/* Purpose:  SiteMasterLayout2Col.css is a complementary file to SiteMasterLayout.css.
+   Its main purpose is to describe CSS-based layout styles that are specifc to
+   the 2-column layouts.  Style definitions in this file should be mutually 
+   exclusive of the 3-column version.
+
+   Reminder:  This file is NOT designed for font definitions!
+
+   Revision History:
+   -----------------
+   2008-Jan- Initial Release for BerkeleyExtranetSite project.  (EYang)
+*/
+
+/* V3 = revisiting centering methods.  Changes to background image necessary.
+  (EYang, Dec 2007) */
+
+#MasterBodyOuterContainer
+{
+  /* background: url(images/besBackground/SiteMasterLayout2ColBackground.gif) top right repeat-y; */
+  background-image: url('images/besBackground/siteMasterLayout2ColShadow2.gif');
+  xxxbackground-image: url('images/besBackground/siteMasterLayout2Col900px.gif');
+  background-position: top right;
+  background-repeat: repeat-y;
+}
+
+#Col2OuterContainer
+{
+	/* you can activate background-color for debugging only, but production 
+     implementation includes background image with color of *this* column,
+     so background-color definition is redundant  */
+  /* background-color: #ffffff; */
+}
+
+#Col2InnerContainer
+{
+  width: 720px; /* append new style for design update (EYang, Dec 2007) */
+}
