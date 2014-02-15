@@ -1,14 +1,14 @@
 /**
  * Berkeley Health Rating Inspector
  *
- * Author: Colorado Reed (colorado@berkeley.edu)
+ * Author: Colorado Reed (colorado _AT_ berkeley.edu)
  * 15 Oct 2013
  */
 
   /* TODO global refactorization using OOP */
-  
+
 (function(d3, topojson){
-  
+
   //
   /*******************
    *     Setup       *
@@ -39,7 +39,7 @@
 
   var KEYCODES = {UP: 38, DOWN: 40, ENTER: 13},
       selNum = 0;
-  
+
   /* data properties of the input data */
   var cols = ["absent-data", "clean", "little-health", "medium-health", "severe-health"],
       dataProps = {"vtemp": "improper holding temperature",
@@ -56,7 +56,7 @@
       height = 500;
   // set height and width
   updateWindow();
-  
+
   /* keep track of the visible nodes */
   var circles,
       insetCircles,
@@ -150,10 +150,6 @@
       .attr("r", 20)
       .attr("fill", "blue");
 
-  
-
-          
-
   // listen for mousedown events on the svg (move the inset box)
   d3.select(document.body).on("keydown", keyDown);
   svg.on("mouseup", function(){
@@ -163,7 +159,7 @@
 
   // listen for key events on the text input
   d3.select("#user-text").on("keyup", textKeyUp);
-  
+
   window.onresize = updateWindow;
 
 
@@ -172,7 +168,7 @@
    *    Functions    *
    *******************/
   //
-  
+
   /* handle window resizing */
   function updateWindow(){
     width = window.innerWidth || docEl.clientWidth || bodyEl.clientWidth;
@@ -185,7 +181,7 @@
   /* redraw the svg inset */
   function redrawInset(){
     svgInsetG.selectAll("g").remove(); // TODO fix this hack
-    
+
     var insetTiler = d3.geo.tile()
           .size([insetWidth, insetHeight]);
 
@@ -215,7 +211,7 @@
         .attr("height", boxHeight)
         .attr("id", viewConsts.blueBoxId);
     }
-    
+
     // redraw interior inset
     projInset = d3.geo.mercator()
       .center(insetState.pos)
@@ -232,14 +228,17 @@
       .append("g")
       .each(function(d) {
         var g = d3.select(this);
-        d3.json("http://" + ["a", "b", "c"][(d[0] * 31 + d[1]) % 3] + ".tile.openstreetmap.us/vectiles-highroad/" + d[2] + "/" + d[0] + "/" + d[1] + ".json", function(error, json) {
-          g.selectAll("path")
-            .data(json.features.sort(function(a, b) { return a.properties.sort_key - b.properties.sort_key; }))
-            .enter().append("path")
-            .attr("class", function(d) { return d.properties.kind; })
-            .attr("d", insetPath);
+        d3.json("http://" + ["a", "b", "c"][(d[0] * 31 + d[1]) % 3]
+                + ".tile.openstreetmap.us/vectiles-highroad/" + d[2]
+                + "/" + d[0] + "/" + d[1] + ".json",
+                function(error, json) {
+                  g.selectAll("path")
+                    .data(json.features.sort(function(a, b) { return a.properties.sort_key - b.properties.sort_key; }))
+                    .enter().append("path")
+                    .attr("class", function(d) { return d.properties.kind; })
+                    .attr("d", insetPath);
+                });
         });
-      });
     if (insetCircles){
       insetCircles.remove();
       // TODO this is sloppy, fix!
@@ -315,7 +314,7 @@
     wrapDiv.append("h3").text("reviewed: " + d.date);
     // violation list
     if (d.hr <= 1){
-      var text = d.hr == 0 ? "no health inspections" : "clean health inspection";  
+      var text = d.hr == 0 ? "no health inspections" : "clean health inspection";
       wrapDiv.append("p").attr("class", viewConsts.noteClass).text(text);
     } else {
       var ul = wrapDiv.append("ul");
@@ -334,6 +333,8 @@
    * Checks if the query text (qText) fuzzily matches the baseText?
    */
   function fuzzyMatch(qText, baseText){
+    match = baseText.match(qText)
+    return match && match.length > 0;
     var qlen = qText.length,
         qpos = 0,
         match = true,
@@ -354,10 +355,10 @@
     // show text in the corner if not escape
     var inputTxtBox = document.getElementById("user-text"),
         keyCode = d3.event.keyCode;
-    
+
     // remove hover summaries
     d3.selectAll("." + viewConsts.summaryClass).remove();
-    
+
     if (document.activeElement.id !== inputTxtBox.id){
       inputTxtBox.value = "";
       inputTxtBox.focus();
@@ -375,7 +376,7 @@
         arrowDown = keyCode == KEYCODES.DOWN,
         enterPressed = keyCode == KEYCODES.ENTER,
         exactMatch = false;
-    
+
     if ( arrowUp || arrowDown){
       // move text selection
       var lis = d3Ul.selectAll("li"),
@@ -401,7 +402,7 @@
     } else{
       inText = this.value.toLowerCase();
     }
-    
+
     var inTextLen = inText.length,
         fmatch,
         nshow = 0,
@@ -457,5 +458,3 @@
     return splitVals.join(" ");
   }
 })(window.d3, window.topojson);
-
-
